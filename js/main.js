@@ -1,4 +1,6 @@
-const cards = [
+//variables
+
+var cards = [
     {
         rank: 'queen',
         suit: 'hearts',
@@ -21,7 +23,12 @@ const cards = [
     }
 ];
 
-const cardsInPlay = [];
+var cardsInPlay = [];
+
+var deck = document.getElementById("game-board");
+
+
+//functions
 
 function checkForMatch() {
     if (cardsInPlay.length === 2) {
@@ -56,11 +63,28 @@ function flipCard() {
 function createBoard () {
     for (let i = 0; i < cards.length; i++) {
         let cardElement = document.createElement('img');
-    cardElement.setAttribute('src', "images/back.png");
-    cardElement.setAttribute('data-id', i);
-    cardElement.addEventListener('click', flipCard);
-    document.getElementById('game-board').appendChild(cardElement);
+            cardElement.setAttribute('src', "images/back.png");
+            cardElement.setAttribute('data-id', i);
+            cardElement.addEventListener('click', flipCard);
+            document.getElementById('game-board').appendChild(cardElement);
     }
 };
 
-createBoard();
+function shuffle(cards) {
+    var currentIndex = cards.length, temporaryValue, randomIndex;
+
+    while (currentIndex !== 0) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+        temporaryValue = cards[currentIndex];
+        cards[currentIndex] = cards[randomIndex];
+        cards[randomIndex] = temporaryValue;
+      }
+      return cards;
+};
+
+
+//calling functions
+    createBoard();
+    shuffle(cards);
+
